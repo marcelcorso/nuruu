@@ -1,11 +1,7 @@
-package main
-
-import (
-  "fmt"
-)
+package nuruu
 
 type Node struct {
-  value int
+  key int
   next *Node
 }
 
@@ -14,8 +10,8 @@ type LinkedList struct {
   tail *Node
 }
 
-func (ll *LinkedList) add(value int) {
-  node := &Node{value: value}
+func (ll *LinkedList) add(key int) {
+  node := &Node{key: key}
   if ll.head == nil {
     ll.head = node
     ll.tail = node
@@ -25,26 +21,11 @@ func (ll *LinkedList) add(value int) {
   }
 }
 
-func (ll *LinkedList) print() {
-  if ll.head == nil {
-    fmt.Printf("<< empty >>")
-  } else {
-    walker := ll.head
-    for walker != nil {
-      fmt.Printf("%d -> ", walker.value)
-      walker = walker.next
-    }
+func (ll *LinkedList) each(visit func(key int)) {
+  walker := ll.head
+  for walker != nil {
+    visit(walker.key)
+    walker = walker.next
   }
 }
-
-func main() {
-  ll := &LinkedList{}
-  for i := 0; i < 10; i++ {
-    ll.add(i)
-  }
-
-  ll.print()
-  fmt.Printf("\n")
-}
-
 
