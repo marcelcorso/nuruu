@@ -1,31 +1,38 @@
 package nuruu
 
-type Node struct {
-  key int
-  next *Node
+type ListNode struct {
+	key  interface{}
+	next *ListNode
 }
 
 type LinkedList struct {
-  head *Node
-  tail *Node
+	head *ListNode
+	tail *ListNode
 }
 
-func (ll *LinkedList) add(key int) {
-  node := &Node{key: key}
-  if ll.head == nil {
-    ll.head = node
-    ll.tail = node
-  } else {
-    ll.tail.next = node
-    ll.tail = node
-  }
+func (ll *LinkedList) add(key interface{}) {
+	node := &ListNode{key: key}
+	if ll.head == nil {
+		ll.head = node
+		ll.tail = node
+	} else {
+		ll.tail.next = node
+		ll.tail = node
+	}
 }
 
-func (ll *LinkedList) each(visit func(key int)) {
-  walker := ll.head
-  for walker != nil {
-    visit(walker.key)
-    walker = walker.next
-  }
+func (ll *LinkedList) each(visit func(key interface{}) bool) {
+	walker := ll.head
+	for walker != nil {
+		if (visit(walker.key) == false) {
+      break
+    }
+		walker = walker.next
+	}
 }
+
+/*
+func (ll *LinkedList) member(key interface{}) {
+}
+*/
 
