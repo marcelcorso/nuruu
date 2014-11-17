@@ -1,8 +1,12 @@
 package nuruu
 
-import "testing"
+import (
+  "fmt"
+  "testing"
+  "strconv"
+)
 
-func TestFirstTreeAdd(t *testing.T) {
+func TestBasicTree(t *testing.T) {
   g := NewGraph()
   g.Add("a", "b")
   g.Add("a", "c")
@@ -35,4 +39,9 @@ func TestFirstTreeAdd(t *testing.T) {
     t.Errorf("a-a edges are not allowed")
   }
 
+  g.Remove("a", "b")
+
+  if g.Adjacent("a", "b") == true {
+    t.Errorf("a-b should be gone")
+  }
 }
