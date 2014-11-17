@@ -18,7 +18,6 @@ func NewGraph() *Graph {
     fmt.Println("NewGraph")
     g := new(Graph)
     g.rows = make(map[string]*Edge)
-    g.verticeValues = make(map[string]int)
     return g
 }
 
@@ -31,7 +30,7 @@ func (g *Graph) Add(row string, column string) bool {
     row, column = column, row
   }
 
-  edge := Edge{row, column, 0, nil}
+  edge := Edge{row, column, nil}
 
   var previous *Edge = nil
   p := g.rows[row]
